@@ -4,7 +4,7 @@
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/items/detail-bom*
-// @downloadURL  https://raw.githubusercontent.com/hans-strudel/tampermonkey/master/ArenaHighlight.js
+// @downloadURL  https://raw.githubusercontent.com/hans-strudel/tampermonkey/master/ArenaHighlight.user.js
 // ==/UserScript==
 /* jshint -W097 */
 
