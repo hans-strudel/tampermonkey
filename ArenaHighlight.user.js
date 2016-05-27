@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.0.1
+// @version      1.0.2
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
-// @match        https://app.bom.com/items/detail-bom*
+// @match        https://app.bom.com/*
 // @downloadURL  https://raw.githubusercontent.com/hans-strudel/tampermonkey/master/ArenaHighlight.user.js
 // ==/UserScript==
 /* jshint -W097 */
 
-var BOM
+var BOM, ITEMS
 
 var oldColor = "#fff"
 var firstThree = "#f4f4fb"
@@ -19,13 +19,50 @@ var importants = ["PROGRAM", " IC", "IC ", "FAB", "P.C.B.", "Program"]
 
 function init(){
     console.log("ArenaHighlight Loaded -- Hans Strausl @ Bestronics")
-    BOM = document.getElementsByClassName("TABLEList")[0]
-    BOM.onchange = update
-    BOMitems = BOM.getElementsByTagName("tr")
-    setTimeout(update, 1000)
+    BOM = document.getElementsByClassName("TABLEList").BOM || 
+        document.getElementById("InboxMessagesList")
+    console.log(document.getElementsByClassName("TABLEList"))
+    if (BOM){
+        BOM.onchange = update
+        setTimeout(update, 1000)
+    } else {
+        console.log("No table found, trying div")
+        ITEMS = document.getElementById("search-list")
+    }
+    if (ITEMS){
+        ITEMS.onchange = itemsupdate
+    } else {
+        console.log("No items found either.")
+    }
+}
+
+function itemsupdate(){
+    ITEMSlist = document.getElementsByClassName("TABLEList").qTable
+        .getElementsByTagName("div")[1]
+        .children[1]
+        .children[0]
+        .children
+    for (var i = 0; i < ITEMSlist.length; i++){
+        var inp = ITEMSlist[i].getElementsByTagName("input")
+        if (inp.length > 0){
+            var check = inp[0].checked
+            divs = inp[0].parentElement.parentElement.getElementsByTagName("div")
+            for (var j = 0; j < divs.length; j++){
+                var inn = divs[j].innerHTML
+                var isImportant = false
+                importants.forEach(function(elem,index, array){
+                    if (inn.indexOf(elem) > -1){
+                        isImportant = true
+                    }
+                })
+                divs[j].style.backgroundColor = (check || isImportant)?((isImportant)?importantColor:highColor):((j<3)?firstThree:oldColor)
+            }
+        }
+    }
 }
 
 function update(){
+    BOMitems = BOM.getElementsByTagName("tr")
     for (var i = 0; i < BOMitems.length; i++){
         var inp = BOMitems[i].getElementsByTagName("input")
         if (inp.length > 0) {
@@ -37,8 +74,7 @@ function update(){
                 importants.forEach(function(elem,index, array){
                     if (inn.indexOf(elem) > -1){
                         isImportant = true
-                        console.log(isImportant)
-                        }
+                    }
                 })
                 cols[j].style.backgroundColor = (check || isImportant)?((isImportant)?importantColor:highColor):((j<3)?firstThree:oldColor)
             }
@@ -46,4 +82,6 @@ function update(){
     }
 }
 
-window.addEventListener('load', init, false)
+window.addEventListener('load', function(){
+    setTimeout(init, 1000)
+}, false)
