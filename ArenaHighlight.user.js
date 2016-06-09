@@ -15,7 +15,7 @@ var firstThree = "#f4f4fb"
 var highColor = "#00cc44"
 var importantColor = "#04c8c2"
 
-var importants = ["PROGRAM", " IC", "IC ", "FAB", "P.C.B.", "Program"]
+var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "Program", "Pcb"]
 
 function init(){
     console.log("ArenaHighlight Loaded -- Hans Strausl @ Bestronics")
