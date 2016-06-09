@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.1.3
+// @version      1.1.4
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/*
@@ -15,7 +15,7 @@ var firstThree = "#f4f4fb"
 var highColor = "#00cc44"
 var importantColor = "#04c8c2"
 
-var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "Program", "Pcb"]
+var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "P.C.B" "Program", "Pcb"]
 
 function init(){
     console.log("ArenaHighlight Loaded -- Hans Strausl @ Bestronics")
