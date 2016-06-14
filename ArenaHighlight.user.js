@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.1.4
+// @version      1.1.5
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/*
@@ -24,7 +24,7 @@ function init(){
     console.log(document.getElementsByClassName("TABLEList"))
     if (BOM){
         BOM.onchange = update
-        setTimeout(update, 1000)
+        setTimeout(update, 100)
     } else {
         console.log("No table found, trying div")
         ITEMS = document.getElementById("search-list")
