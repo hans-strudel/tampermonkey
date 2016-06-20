@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.1.5
+// @version      1.1.6
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/*
@@ -24,6 +24,7 @@ function init(){
     console.log(document.getElementsByClassName("TABLEList"))
     if (BOM){
         BOM.onchange = update
+        document.onscroll = update
         setTimeout(update, 100)
     } else {
         console.log("No table found, trying div")
@@ -31,16 +32,19 @@ function init(){
     }
     if (ITEMS){
         ITEMS.onchange = itemsupdate
+        document.onscroll = itemsupdate
     } else {
         console.log("No items found either.")
     }
 }
 
 function itemsupdate(){
+    console.log('updating')
     ITEMSlist = document.getElementsByClassName("TABLEList").qTable
         .getElementsByTagName("div")[1]
         .children[1]
-        .children[0]
+    ITEMSlist.onscroll = itemsupdate
+    ITEMSlist = ITEMSlist.children[0]
         .children
     for (var i = 0; i < ITEMSlist.length; i++){
         var inp = ITEMSlist[i].getElementsByTagName("input")
