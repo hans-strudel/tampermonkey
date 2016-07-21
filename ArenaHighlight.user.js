@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.1.6
+// @version      1.1.7
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/*
@@ -8,18 +8,18 @@
 // ==/UserScript==
 /* jshint -W097 */
 
-var BOM, ITEMS
+var BOM, ITEMS;
 
 var oldColor = "#fff"
 var firstThree = "#f4f4fb"
 var highColor = "#00cc44"
 var importantColor = "#04c8c2"
 
-var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "P.C.B", "Program", "Pcb"]
+var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "P.C.B", "Program", "Pcb", "Printed"];
 
 function init(){
     console.log("ArenaHighlight Loaded -- Hans Strausl @ Bestronics")
-    BOM = document.getElementsByClassName("TABLEList").BOM || 
+    BOM = document.getElementsByClassName("TABLEList").BOM ||
         document.getElementById("InboxMessagesList")
     console.log(document.getElementsByClassName("TABLEList"))
     if (BOM){
@@ -87,5 +87,5 @@ function update(){
 }
 
 window.addEventListener('load', function(){
-    setTimeout(init, 1000)
+    setTimeout(init, 500);
 }, false)
