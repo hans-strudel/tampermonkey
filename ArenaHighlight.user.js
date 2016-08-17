@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Arena Highlight
-// @version      1.1.7
+// @version      1.1.8
 // @description  Highlight Individual BOM Items
 // @author       Hans Strausl @ BestronicsInc 2016
 // @match        https://app.bom.com/*
