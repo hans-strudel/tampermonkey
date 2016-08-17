@@ -19,6 +19,21 @@ var importants = ["PROGRAM", "PCB", "FAB", "P.C.B.", "P.C.B", "Program", "Pcb", 
 
 function init(){
     console.log("ArenaHighlight Loaded -- Hans Strausl @ Bestronics")
+    
+    var search = document.getElementsByName('search_textfield')[0];
+    if (search){
+        search.oninput = function(e){
+            localStorage.searchSave = e.target.value;
+        };
+        search.value = localStorage.searchSave || '';
+    }
+    if (search) search.accessKey = 's';
+    var pagetips = document.getElementById('pagetips');
+    if (pagetips){
+        pagetips.style.height = '5px';
+        pagetips.style.overflowY = 'scroll';
+    }
+    
     BOM = document.getElementsByClassName("TABLEList").BOM ||
         document.getElementById("InboxMessagesList")
     console.log(document.getElementsByClassName("TABLEList"))
